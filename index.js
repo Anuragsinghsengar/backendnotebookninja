@@ -6,10 +6,13 @@ connectToMongo();
 const app = express();
 const port = 5000;
 
-app.use(cors({
-  origin:"*"
-}));
+app.use(cors());
 app.use(express.json())
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // You can replace '*' with specific origin(s) allowed to access
+  next();
+});
 app.get('/', (req,res)=> {
   res.send("Hello Anurag");
 })
